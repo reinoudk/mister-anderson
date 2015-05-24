@@ -1,0 +1,7 @@
+{
+  "name": "mister-anderson",
+  "version": "0.0.1",
+  "description": "Neo4j driver build in ES6",
+  "author": "Reinoud Kruithof <reinoud.kruithof@gmail.com>",
+  "license": "MIT"
+}
