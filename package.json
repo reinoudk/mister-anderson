@@ -1,7 +1,11 @@
 {
   "name": "mister-anderson",
-  "version": "0.0.1",
+  "version": "0.0.4-alpha",
   "description": "Neo4j driver build in ES6",
   "author": "Reinoud Kruithof <reinoud.kruithof@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^5.4.7",
+    "nodeunit": "^0.9.1"
+  }
 }
