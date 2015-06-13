@@ -3,6 +3,11 @@
   "version": "0.0.4-alpha",
   "description": "Neo4j driver build in ES6",
   "author": "Reinoud Kruithof <reinoud.kruithof@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/reinoudk/mister-anderson.git"
+  },
+  "homepage": "https://github.com/reinoudk/mister-anderson",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^5.4.7",
