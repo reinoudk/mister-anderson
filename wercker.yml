@@ -1,0 +1,28 @@
+box: iojs:latest
+services:
+ - id: kbastani/docker-neo4j
+
+build:
+  steps:
+    - npm-install
+
+    - script:
+        name: neo4j check
+        code: |
+          echo -e "\e[1mwaiting (20s max) for Neo4j service to be online.\e[21m"
+          i=0; NEO4J_ONLINE=0;
+          while ((i < 20)) && ((200!=$NEO4J_ONLINE))
+          do
+            printf "."
+            NEO4J_ONLINE=$(echo $(curl -s -o /dev/null -w "%{http_code}" -H "Accept: application/json" $DOCKER_NEO4J_PORT_7474_TCP_ADDR:7474))
+            sleep 1
+          done
+          if ((200!=$NEO4J_ONLINE))
+          then
+            echo -e "\e[31mCould not connect to Neo4j container\e[39m" >&2
+            exit 1
+          else
+            echo -e "\n\e[32mNeo4j container online!\e[39m"
+          fi
+
+    - npm-test

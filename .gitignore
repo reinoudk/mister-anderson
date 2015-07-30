@@ -3,3 +3,8 @@
 
 # Package managers
 node_modules
+
+# Wercker CI
+_builds
+_projects
+_steps
