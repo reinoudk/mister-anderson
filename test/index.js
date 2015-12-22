@@ -1,25 +1,28 @@
 "use strict";
 
 var http = require('http');
-var path = require('path');
+var url = require('url');
+var MisterAnderson = require('../lib');
 
-exports.neo4j = function (test) {
+exports.init = function (test) {
 
-  var ma = require('../lib')({host: process.env.DOCKER_NEO4J_PORT_7474_TCP_ADDR});
+  var options = {
+    host: process.env.NEO4J_PORT_7474_TCP_ADDR,
+    port: process.env.NEO4J_PORT_7474_TCP_PORT
+  };
 
-  ma.connect()
-    .then(function onFulfilled (res) {
-      test.equals(200, res.statusCode, "We should get an ok response");
-      test.done();
-    },
-    function onRejected (e) {
-      test.ok(false, "We should not be here.");
-      console.log(e);
+  var ma = new MisterAnderson(options);
+
+  ma
+    .init()
+    .then((root) => {
+      test.equals('object', typeof root, "We should get an ok response");
+      test.doesNotThrow(() => { url.parse(ma.root['transaction']) }, "Tansactional endpoint should be a parseble url");
       test.done();
     })
-    .catch(function (e) {
-      test.ok(false, "We should not be here.");
-      console.log(e);
+    .catch((error) => {
+      test.ok(false, "The initialisation should not fail");
+      console.log(error);
       test.done();
     });
 
